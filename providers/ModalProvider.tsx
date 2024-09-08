@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 
-import LoginModal from "@/components/LoginModal";
-import RegisterModal from "@/components/RegisterModal";
+import AuthModal from "@/components/AuthModal";
+import UploadModal from "@/components/UploadModal";
 
 const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState<boolean>(false);
@@ -17,8 +17,8 @@ const ModalProvider = () => {
   }
   return (
     <>
-      <LoginModal />
-      <RegisterModal />
+      <AuthModal />
+      <UploadModal />
     </>
   );
 };

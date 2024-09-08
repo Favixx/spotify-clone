@@ -10,6 +10,7 @@ import useAuthModal from "@/hooks/useAuthModal";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useUser } from "@/hooks/useUser";
 import { FaUserAlt } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 interface HeaderProps {
   children: React.ReactNode;
@@ -29,7 +30,9 @@ const Header: FC<HeaderProps> = ({ children, className }) => {
     router.refresh();
 
     if (error) {
-      console.log(error);
+      toast.error(error.message);
+    } else {
+      toast.success("Successfully logged out");
     }
   };
   return (
@@ -77,13 +80,13 @@ const Header: FC<HeaderProps> = ({ children, className }) => {
           ) : (
             <>
               <Button
-                onClick={authModal.onOpenRegister}
+                onClick={() => authModal.openModal("sign_up")}
                 className="bg-transparent text-neutral-300 font-medium"
               >
                 Sign up
               </Button>
               <Button
-                onClick={authModal.onOpenLogin}
+                onClick={() => authModal.openModal("sign_in")}
                 className="bg-white px-6 py-2"
               >
                 Log in

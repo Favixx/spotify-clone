@@ -1,19 +1,18 @@
+import { ViewType } from "@supabase/auth-ui-shared";
 import { create } from "zustand";
 
 interface AuthModalStore {
-  isOpenRegister: boolean;
-  isOpenLogin: boolean;
-  onOpenLogin: () => void;
-  onOpenRegister: () => void;
-  onClose: () => void;
+  view: ViewType;
+  isOpen: boolean;
+  openModal: (window: ViewType) => void;
+  closeModal: () => void;
 }
 
 const useAuthModal = create<AuthModalStore>((set) => ({
-  isOpenRegister: false,
-  isOpenLogin: false,
-  onOpenLogin: () => set({ isOpenLogin: true }),
-  onOpenRegister: () => set({ isOpenRegister: true }),
-  onClose: () => set({ isOpenLogin: false, isOpenRegister: false }),
+  view: "sign_in",
+  isOpen: false,
+  openModal: (view: ViewType) => set({ view, isOpen: true }),
+  closeModal: () => set({ view: "sign_in", isOpen: false }),
 }));
 
 export default useAuthModal;
